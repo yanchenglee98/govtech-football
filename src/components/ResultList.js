@@ -25,10 +25,22 @@ export default function ResultList() {
                             <div>{result.team1} {result.for} - {result.against} {result.team2}</div>
                         </div>
                     </div>
+                    <div className="column is-narrow">
+                        <div className="buttons">
+                            <button className="button is-danger" onClick={() => handleDeleteResult(result, idx)}>Delete</button>
+                        </div>
+                    </div>
                 </div>
             );
         });
     };
+
+    const handleDeleteResult = (result, idx) => {
+        // update the list 
+        const newResults = [...results];
+        newResults.splice(idx, 1);
+        setResults(newResults);
+    }
 
     const handleAddNewResult = (data) => {
         const newResultList = [...results];

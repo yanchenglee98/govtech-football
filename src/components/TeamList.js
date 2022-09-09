@@ -25,10 +25,23 @@ export default function TeamList() {
                             <div>{team.name}, {team.reg}, {team.grp} </div>
                         </div>
                     </div>
+
+                    <div className="column is-narrow">
+                        <div className="buttons">
+                            <button className="button is-danger" onClick={() => handleDeleteTeam(team, idx)}>Delete</button>
+                        </div>
+                    </div>
                 </div>
             );
         });
     };
+
+    const handleDeleteTeam = (team, idx) => {
+        // update the list 
+        const newTeams = [...teams];
+        newTeams.splice(idx, 1);
+        setTeams(newTeams);
+    }
 
     const handleAddNewTeam = (data) => {
         const newTeamList = [...teams];
