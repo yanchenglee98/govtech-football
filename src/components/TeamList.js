@@ -19,7 +19,7 @@ export default function TeamList() {
             console.log(teams);
             return (
                 // mt-3 defines margins
-                <div className="columns teams mt-3 is-vcentered"> 
+                <div className="columns team mt-3 is-vcentered"> 
                     <div className="column has-text-left">
                         <div key={idx}>
                             <div>{team.name}, {team.reg}, {team.grp} </div>

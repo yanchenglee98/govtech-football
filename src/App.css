@@ -3,3 +3,13 @@
   height: 100vh;
   background-color: white;
 }
+
+.team {
+  background-color: rgb(189, 232, 252);
+  border-radius: 7px;
+}
+
+.result {
+  background-color: rgb(189, 232, 252);
+  border-radius: 7px;
+}

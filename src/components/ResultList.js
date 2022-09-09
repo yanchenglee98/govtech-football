@@ -19,7 +19,7 @@ export default function ResultList() {
             console.log(results);
             return (
                 // mt-3 defines margins
-                <div className="columns results mt-3 is-vcentered"> 
+                <div className="columns result mt-3 is-vcentered"> 
                     <div className="column has-text-left">
                         <div key={idx}>
                             <div>{result.team1} {result.for} - {result.against} {result.team2}</div>
