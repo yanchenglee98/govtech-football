@@ -124,38 +124,76 @@ export default function Table() {
 
 
     const getTableAToRender = () => {
-        return tableA.map((team, idx) => {
-            return (
-                // mt-3 defines margins
-                <div className="columns team mt-3 is-vcentered"> 
-                    <div className="column has-text-left">
-                        <div key={idx}>
-                            <div>{team.teamName}, points: {team.points}, goals: {team.goals} </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+        return (
+            <table className="table">
+            <thead>
+                <tr>
+                <th><abbr title="Position">Pos</abbr></th>
+                <th>Team</th>
+                <th><abbr title="Goals for">Goals</abbr></th>
+                <th><abbr title="Points">Pts</abbr></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                <th><abbr title="Position">Pos</abbr></th>
+                <th>Team</th>
+                <th><abbr title="Goals for">Goals</abbr></th>
+                <th><abbr title="Points">Pts</abbr></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {tableA.map((ele, idx) => (
+                    <tr key = {idx}>
+                        <th>{idx+1}</th>
+                        <td>{ele.teamName}</td>
+                        <td>{ele.goals}</td>
+                        <td>{ele.points}</td>
+                    </tr>
+                ))}
+            </tbody>
+            </table>       
+        );
     };
 
     const getTableBToRender = () => {
-        return tableB.map((team, idx) => {
-            return (
-                // mt-3 defines margins
-                <div className="columns team mt-3 is-vcentered"> 
-                    <div className="column has-text-left">
-                        <div key={idx}>
-                            <div>{team.teamName}, points: {team.points}, goals: {team.goals} </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+        return (
+            <table className="table">
+            <thead>
+                <tr>
+                <th><abbr title="Position">Pos</abbr></th>
+                <th>Team</th>
+                <th><abbr title="Goals for">Goals</abbr></th>
+                <th><abbr title="Points">Pts</abbr></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                <th><abbr title="Position">Pos</abbr></th>
+                <th>Team</th>
+                <th><abbr title="Goals for">Goals</abbr></th>
+                <th><abbr title="Points">Pts</abbr></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {tableB.map((ele, idx) => (
+                    <tr key = {idx}>
+                        <th>{idx+1}</th>
+                        <td>{ele.teamName}</td>
+                        <td>{ele.goals}</td>
+                        <td>{ele.points}</td>
+                    </tr>
+                ))}
+            </tbody>
+            </table>       
+        );
     };
 
     const handleTableClick = () => {
         const resA = generateGroupAResults();
         const resB = generateGroupBResults();
+
+        console.log(resA)
 
         setTableA(resA.sort(comparator));
         setTableB(resB.sort(comparator));
@@ -207,7 +245,7 @@ export default function Table() {
             var goals1 = mapB.get(teamOne)["goals"] + teamOneGoals;
 
             var pt2 = mapB.get(teamTwo)["points"];
-            var goals2 = mapB.get(teamOne)["goals"] + teamTwoGoals;
+            var goals2 = mapB.get(teamTwo)["goals"] + teamTwoGoals;
             if (teamOneGoals > teamTwoGoals) {
                 // update teamOne
                 pt1 += 3;
@@ -244,7 +282,7 @@ export default function Table() {
             var goals1 = mapA.get(teamOne)["goals"] + teamOneGoals;
 
             var pt2 = mapA.get(teamTwo)["points"];
-            var goals2 = mapA.get(teamOne)["goals"] + teamTwoGoals;
+            var goals2 = mapA.get(teamTwo)["goals"] + teamTwoGoals;
             if (teamOneGoals > teamTwoGoals) {
                 // update teamOne
                 pt1 += 3;
