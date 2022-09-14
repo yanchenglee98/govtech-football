@@ -212,6 +212,10 @@ export default function Table() {
         return 1;
     }
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     const resultTable = () => {
         return (
             <div>
@@ -225,6 +229,11 @@ export default function Table() {
                 <br></br>
                 <h1 className='title has-text-black'>Table 2</h1>
                 <div>{getTableBToRender()}</div>
+                <div className="column is-narrow">
+                    <div className="buttons">
+                        <button className="button is-danger" onClick={refreshPage}>Clear data</button>
+                    </div>
+                </div>
             </div>
         )}
 
