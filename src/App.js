@@ -1,7 +1,6 @@
 import './App.css';
 import 'bulma/css/bulma.min.css'
-import TeamList from './components/TeamList';
-import ResultList from './components/ResultList';
+import Table from './components/Table';
 
 function App() {
   return (
@@ -21,21 +20,10 @@ function App() {
       <div className='container'>
         <div className='columns is-centered'>
           <div className='column is-half'>
-            <h1 className='title has-text-white'>Team List</h1>
-            <TeamList />
+            <Table />
           </div>
         </div>
       </div>
-      
-      <div className='container'>
-        <div className='columns is-centered'>
-          <div className='column is-half'>
-            <h1 className='title has-text-white'>Team List</h1>
-            <ResultList />
-          </div>
-        </div>
-      </div>
-    
     </div>
   );
 }
