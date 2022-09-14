@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Table() {
-    // for team registration
+    // to store input for team registration
     const [message, setMessage] = useState('');
 
     // use 2 maps to keep track of the teams in each group
@@ -57,7 +57,7 @@ export default function Table() {
 
     // for result submission
 
-    // for getting input 
+    // to store input for result submission
     const [message2, setMessage2] = useState('');
 
     // use 2 arrays to keep track of the match results from the 2 groups
@@ -119,6 +119,8 @@ export default function Table() {
     }
 
     // table 
+
+    // to hold the positions of each team in the table
     const [tableA, setTableA] = useState([]);
     const [tableB, setTableB] = useState([]);
 
@@ -193,8 +195,6 @@ export default function Table() {
         const resA = generateGroupAResults();
         const resB = generateGroupBResults();
 
-        console.log(resA)
-
         setTableA(resA.sort(comparator));
         setTableB(resB.sort(comparator));
     }
@@ -207,7 +207,8 @@ export default function Table() {
         if (a.goals !== b.goals) {
             return b.goals - a.goals;
         }
-
+        
+        // TODO: comparator is missing comparison of alternate score and register date
         return 1;
     }
 
@@ -228,7 +229,7 @@ export default function Table() {
         )}
 
     const generateGroupBResults = () => {
-        const mapB = new Map();        
+        const mapB = new Map(); //map to keep track of each team and its status of name, points and goals
         
         for (const [key, value] of groupBTeams.entries()) {
             mapB.set(key, {teamName: key, points: 0, goals: 0});
@@ -250,7 +251,7 @@ export default function Table() {
                 // update teamOne
                 pt1 += 3;
             } else if (teamOneGoals < teamTwoGoals) {
-                // update teamOne
+                // update teamTwo
                 pt2 += 3;
             } else {
                 pt1 += 1;
@@ -267,7 +268,7 @@ export default function Table() {
     }
 
     const generateGroupAResults = () => {
-        const mapA = new Map();
+        const mapA = new Map(); //map to keep track of each team and its status of name, points and goals
         for (const [key, value] of groupATeams.entries()) {
             mapA.set(key, {teamName: key, points: 0, goals: 0});
         }
@@ -287,7 +288,7 @@ export default function Table() {
                 // update teamOne
                 pt1 += 3;
             } else if (teamOneGoals < teamTwoGoals) {
-                // update teamOne
+                // update teamTwo
                 pt2 += 3;
             } else {
                 pt1 += 1;
