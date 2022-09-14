@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 export default function Table() {
     // for team registration
     const [message, setMessage] = useState('');
-    const [teams, setTeams] = useState([]);
 
+    // use 2 maps to keep track of the teams in each group
     const [groupATeams, setGroupATeams] = useState(new Map());
     const [groupBTeams, setGroupBTeams] = useState(new Map());
 
@@ -16,19 +16,14 @@ export default function Table() {
         event.preventDefault();
 
         const data = message.split('\n');
-        const res = [];
+
         for (const team of data) {
             const tokens = team.split(' ')
             if (tokens.length !== 3) {
                 continue;
             }
-            res.push({
-                teamName: tokens[0],
-                registeredAt: tokens[1],
-                groupNo: parseInt(tokens[2])
-            })
 
-            if (parseInt(tokens[2]) == 1) {
+            if (parseInt(tokens[2]) === 1) {
                 setGroupATeams(groupATeams.set(tokens[0], {
                     teamName: tokens[0],
                     registeredAt: tokens[1],
@@ -42,22 +37,18 @@ export default function Table() {
                 }))
             }
         }
-
-        setTeams(res);
     }
 
     const teamRegistrationForm = () => {
         return (      
             <div>
                 <h1 className='title has-text-black'>Team Registration</h1>
-                <textarea className="textarea" placeholder="e.g. Hello world" onChange={handleTeamChange}></textarea>
+                <b> For team registration</b>
+                <textarea className="textarea" placeholder="For team registration in the format of <Team A name> <Team A registration date in DD/MM> <Team A group number>" onChange={handleTeamChange}></textarea>
                 <br></br>
                 <div className="field is-grouped">
                     <div className="control">
                         <button onClick={handleTeamClick} className="button is-link">Submit</button>
-                    </div>
-                    <div className="control">
-                        <button className="button is-link is-light">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -65,9 +56,11 @@ export default function Table() {
     }
 
     // for result submission
-    const [message2, setMessage2] = useState('');
-    const [results, setResults] = useState([]);
 
+    // for getting input 
+    const [message2, setMessage2] = useState('');
+
+    // use 2 arrays to keep track of the match results from the 2 groups
     const [groupAResults, setGroupAResults] = useState([]);
     const [groupBResults, setGroupBResults] = useState([]);
 
@@ -79,7 +72,6 @@ export default function Table() {
         event.preventDefault();
 
         const data = message2.split('\n');
-        const res = [];
 
         const tempA = []
         const tempB = []
@@ -89,15 +81,8 @@ export default function Table() {
             if (toks.length !== 4) {
               continue;
             }
-
-            res.push({
-              teamOne: toks[0],
-              teamTwo: toks[1],
-              teamOneGoals: parseInt(toks[2]),
-              teamTwoGoals: parseInt(toks[3])
-            })
             
-            if (groupATeams.get(toks[0]) != undefined) {
+            if (groupATeams.get(toks[0]) !== undefined) {
                 tempA.push({
                     teamOne: toks[0],
                     teamTwo: toks[1],
@@ -113,7 +98,6 @@ export default function Table() {
                 })
             }
         }        
-        setResults(res);
         setGroupAResults(tempA)
         setGroupBResults(tempB)
     }
@@ -122,14 +106,12 @@ export default function Table() {
         return (      
             <div>
                 <h1 className='title has-text-black'>Result Submission</h1>
-                <textarea className="textarea" placeholder="e.g. Hello world" onChange={handleResultChange}></textarea>
+                <b> For result submission, ensure that team registration is done before submitting the results</b>
+                <textarea className="textarea" placeholder="For result submission in the format <Team A name> <Team B name> <Team A goals scored> <Team B goals scored>" onChange={handleResultChange}></textarea>
                 <br></br>
                 <div className="field is-grouped">
                     <div className="control">
                         <button onClick={handleResultClick} className="button is-link">Submit</button>
-                    </div>
-                    <div className="control">
-                        <button className="button is-link is-light">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -148,7 +130,7 @@ export default function Table() {
                 <div className="columns team mt-3 is-vcentered"> 
                     <div className="column has-text-left">
                         <div key={idx}>
-                            <div>{team.teamName}, {team.points}, {team.goals} </div>
+                            <div>{team.teamName}, points: {team.points}, goals: {team.goals} </div>
                         </div>
                     </div>
                 </div>
@@ -163,7 +145,7 @@ export default function Table() {
                 <div className="columns team mt-3 is-vcentered"> 
                     <div className="column has-text-left">
                         <div key={idx}>
-                            <div>{team.teamName}, {team.points}, {team.goals} </div>
+                            <div>{team.teamName}, points: {team.points}, goals: {team.goals} </div>
                         </div>
                     </div>
                 </div>
@@ -196,7 +178,7 @@ export default function Table() {
             <div>
                 <div className="field is-grouped">
                     <div className="control">
-                        <button onClick={handleTableClick} className="button is-link">Submit</button>
+                        <button onClick={handleTableClick} className="button is-link">Generate Table</button>
                     </div>
                 </div>
                 <h1 className='title has-text-black'>Table 1</h1>
